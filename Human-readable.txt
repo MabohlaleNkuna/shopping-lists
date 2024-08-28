@@ -1,0 +1,176 @@
+Step 1: Project Setup
+
+Initialize the Project:
+Create a new React app using create-react-app.
+Set up a new GitHub repository and push the initial code.
+Install required dependencies:
+redux, react-redux for state management.
+react-router-dom for routing.
+json-server for a mock backend.
+axios for making HTTP requests.
+Set Up JSON Server:
+Create a db.json file in the root directory.
+Define the structure for storing users, shopping lists, and items:
+json
+Copy code
+{
+  "users": [],
+  "shoppingLists": []
+}
+Start the JSON server with the command: json-server --watch db.json --port 5000.
+Configure Redux:
+Set up the Redux store and slices for user management and shopping lists.
+Create actions and reducers for handling authentication, profile updates, and CRUD operations on shopping lists.
+
+
+Step 2: Authentication & User Management
+
+Login & Registration Pages:
+UI Design:
+Create simple, responsive forms for login and registration.
+Functionality:
+On registration, hash the user's password before storing it in the JSON server.
+Implement user login functionality by verifying credentials against stored data.
+Protected Routes:
+Set up protected routes using react-router-dom that restrict access to the home and profile pages based on authentication status.
+Profile Management:
+
+Profile Page:
+Allow users to view and update their profile information.
+Updating Login Credentials:
+Provide functionality to update the email, password, and other user details.
+Encrypt the updated password before saving.
+
+
+Step 3: Shopping List Management
+
+Add Shopping Lists:
+UI Design:
+Create a form for adding new shopping lists with fields for name, quantity, notes, category, and an option to upload images.
+Functionality:
+Use Redux to manage the addition of new shopping lists.
+Persist data in the db.json file using Axios for POST requests.
+View Shopping Lists:
+
+UI Design:
+Display all shopping lists in a user-friendly layout.
+Functionality:
+Fetch and display all shopping lists created by the user.
+Allow users to click on a list to view its details.
+Edit Shopping Lists:
+
+UI Design:
+Allow users to edit existing shopping lists.
+Functionality:
+Update the list data in the db.json file through PUT requests.
+Delete Shopping Lists:
+
+UI Design:
+Include a delete button next to each shopping list.
+Functionality:
+Implement delete functionality using DELETE requests to remove lists from the db.json file.
+Search & Sort Shopping Lists:
+
+Search Functionality:
+Add a search bar to filter shopping lists by name.
+Update the URL to reflect the search query and ensure the page updates accordingly.
+Sorting Functionality:
+Implement sorting by name, category, and date added.
+Ensure the sorting is reflected in the URL.
+Sharing Shopping Lists:
+
+Feature Implementation:
+Allow users to share shopping lists via a link or export as a file.
+
+
+Step 4: User Interface & Accessibility
+
+Responsive Design:
+Ensure the app is responsive across all specified breakpoints (320px, 480px, 768px, 1024px, 1200px).
+Use media queries to adjust layouts and ensure usability on different screen sizes.
+Interactive Elements:
+Implement hover effects for clickable elements.
+Ensure the cursor changes to a pointer on hover for interactive elements.
+
+
+Step 5: Performance Optimization
+
+Code Splitting & Lazy Loading:
+Implement code splitting using React's lazy and Suspense to optimize the app's performance.
+Load components asynchronously where appropriate.
+State Management:
+Optimize Redux usage to avoid unnecessary re-renders and ensure smooth performance.
+
+
+Step 6: Security & Privacy
+
+Encryption:
+Ensure that all user credentials are properly encrypted before storing them.
+Handle decryption securely when users log in.
+
+Protected Routing:
+Ensure that non-logged-in users cannot access protected routes.
+Implement proper session management, possibly using JWT tokens for secure login sessions.
+
+
+Step 7: Documentation & Deployment
+
+GitHub Readme:
+Document the project in the GitHub README file, including setup instructions, features, and usage details.
+Final Testing:
+
+Thoroughly test the application to ensure all functionalities work as expected.
+Conduct both manual and automated tests.
+Deployment:
+
+Deploy the app to a hosting platform like Vercel or Netlify.
+Deploy the JSON server backend separately or as a combined deployment if necessary.
+
+Step 6: Security & Privacy
+
+INPUT: email, password, name, surname, cell number
+ENCRYPT password
+STORE user data with encrypted password in db.json
+
+When User Logs In:
+INPUT: email, password
+RETRIEVE encrypted password from db.json
+COMPARE provided password with stored encrypted password
+IF match THEN
+   GRANT access
+ELSE
+   DENY access
+
+Protected Routing:
+
+Check Authentication on Protected Routes:
+FOR each protected route
+   IF user is NOT logged in THEN
+      REDIRECT to login page
+   ELSE
+      ALLOW access to the route
+
+Session Management:
+ON successful login
+   CREATE JWT token
+   STORE token in local storage/cookies
+   ATTACH token to protected requests
+
+ON server-side
+   VALIDATE token for protected resource requests
+   IF valid THEN
+      GRANT access
+   ELSE
+      DENY access
+
+7. Documentation & Deployment
+
+CREATE README.md
+ADD Project Title
+ADD Description
+ADD Features
+ADD Setup Instructions
+ADD Usage Details
+ADD Technologies Used
+ADD Deployment Information
+ADD Future Enhancements

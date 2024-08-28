@@ -1,0 +1,38 @@
+1. User Registration:
+
+On form submit:
+  Collect user input data
+  Hash the password
+  Send a POST request to the JSON server to create a new user
+  Redirect to the login page
+
+2.User Login:
+
+On form submit:
+  Collect user input data
+  Send a GET request to the JSON server to verify credentials
+  If valid, store user session data (e.g., JWT, userID)
+  Redirect to the home page
+  If invalid, display an error message
+
+3. Adding a Shopping List:
+
+On form submit:
+  Collect list details (name, quantity, etc.)
+  Dispatch an action to add the list to Redux state
+  Send a POST request to the JSON server to persist the data
+
+4. Editing a Shopping List:
+
+On edit form submit:
+  Collect updated list details
+  Dispatch an action to update the list in Redux state
+  Send a PUT request to the JSON server to update the data
+
+5. Deleting a Shopping List:
+
+On delete button click:
+  Confirm the action
+  Dispatch an action to remove the list from Redux state
+  Send a DELETE request to the JSON server to remove the data
+

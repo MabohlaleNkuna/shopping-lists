@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "test@example.com",
+      "password": "password123",
+      "name": "John",
+      "surname": "Doe",
+      "phoneNumber": "+1234567890"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "Iron",
+      "quantity": 100,
+      "notes": "This is a great product.",
+      "category": "Electronics",
+      "images": [
+        "https://images.philips.com/is/image/philipsconsumer/vrs_906501b50012fc6bb8028a5bb17ddc4ba31675b3?$pnglarge$&wid=960"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Summer Long Dress",
+      "quantity": 50,
+      "notes": "Limited stock available.",
+      "category": "Clothing",
+      "images": [
+        "https://trendstore.co.za/wp-content/uploads/2021/11/Untitled-1-01.jpg"
+      ]
+    },
+    {
+      "id": "71e7",
+      "name": "jacket",
+      "quantity": "1",
+      "notes": "truytu",
+      "category": "Clothing",
+      "images": [
+        "https://m.media-amazon.com/images/I/61FRgVZBhzL._AC_SX385_.jpg"
+      ]
+    }
+  ]
+}
