@@ -1,21 +1,27 @@
+// src/components/ProductList.js
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import Card from './Card';
 import { fetchAllProducts } from '../store/slices/productSlice';
 import ProductForm from './ProductForm';
+import Search from './Search';
 
 const ProductList = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const { data: products, fetchStatus } = useSelector((state) => state.products);
   const { userData } = useSelector((state) => state.user);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null);
 
+  const query = new URLSearchParams(location.search).get('search') || '';
+
   useEffect(() => {
     if (fetchStatus === '' || fetchStatus === 'error') {
-      dispatch(fetchAllProducts(`http://localhost:5000/products?userId=${userData.id}`));
+      dispatch(fetchAllProducts(`http://localhost:5000/products?userId=${userData.id}&search=${query}`));
     }
-  }, [fetchStatus, dispatch, userData]);
+  }, [fetchStatus, dispatch, userData, query]);
 
   const handleAddProduct = () => {
     setProductToEdit(null);
@@ -39,7 +45,11 @@ const ProductList = () => {
     return <div>Error loading products.</div>;
   }
 
-  const categorizedProducts = products.reduce((acc, product) => {
+  const filteredProducts = products.filter(product =>
+    product.name.toLowerCase().includes(query.toLowerCase())
+  );
+
+  const categorizedProducts = filteredProducts.reduce((acc, product) => {
     if (!acc[product.category]) {
       acc[product.category] = [];
     }
@@ -49,6 +59,7 @@ const ProductList = () => {
 
   return (
     <div className="container product-catalogue">
+      <Search />
       <button onClick={handleAddProduct}>Add New Product</button>
       {Object.keys(categorizedProducts).map((category) => (
         <div key={category}>
