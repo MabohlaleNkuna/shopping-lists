@@ -1,10 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+const LOCAL_STORAGE_KEY = 'products';
+
+const loadProductsFromLocalStorage = () => {
+  const savedProducts = localStorage.getItem(LOCAL_STORAGE_KEY);
+  return savedProducts ? JSON.parse(savedProducts) : [];
+};
+
+const saveProductsToLocalStorage = (products) => {
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(products));
+};
+
 export const fetchAllProducts = createAsyncThunk(
   "products/fetchAllProducts",
-  async (apiUrl) => {
+  async (apiUrl, { dispatch }) => {
     const response = await fetch(apiUrl);
-    return response.json();
+    const data = await response.json();
+    saveProductsToLocalStorage(data); // Save fetched products to localStorage
+    return data;
   }
 );
 
@@ -18,7 +31,8 @@ export const addProduct = createAsyncThunk(
       body: JSON.stringify({ ...product, userId: user.userData.id }),
     });
     const newProduct = await response.json();
-    dispatch(fetchAllProducts(`http://localhost:5000/products?userId=${user.userData.id}`));
+    const products = [...loadProductsFromLocalStorage(), newProduct];
+    saveProductsToLocalStorage(products);
     return newProduct;
   }
 );
@@ -30,22 +44,25 @@ export const updateProduct = createAsyncThunk(
     const response = await fetch(`http://localhost:5000/products/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updates),
+      body: JSON.stringify({ ...updates, userId: user.userData.id }),
     });
     const updatedProduct = await response.json();
-    dispatch(fetchAllProducts(`http://localhost:5000/products?userId=${user.userData.id}`));
+    const products = loadProductsFromLocalStorage().map(product =>
+      product.id === id ? updatedProduct : product
+    );
+    saveProductsToLocalStorage(products);
     return updatedProduct;
   }
 );
 
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
-  async (id, { dispatch, getState }) => {
-    const { user } = getState();
+  async (id, { dispatch }) => {
     await fetch(`http://localhost:5000/products/${id}`, {
       method: 'DELETE',
     });
-    dispatch(fetchAllProducts(`http://localhost:5000/products?userId=${user.userData.id}`));
+    const products = loadProductsFromLocalStorage().filter(product => product.id !== id);
+    saveProductsToLocalStorage(products);
     return id;
   }
 );
@@ -53,7 +70,7 @@ export const deleteProduct = createAsyncThunk(
 const productSlice = createSlice({
   name: "products",
   initialState: {
-    data: [],
+    data: loadProductsFromLocalStorage(),
     fetchStatus: "",
   },
   reducers: {},

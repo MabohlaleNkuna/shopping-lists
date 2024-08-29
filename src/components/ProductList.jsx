@@ -1,4 +1,3 @@
-// src/components/ProductList.js
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
@@ -11,7 +10,7 @@ import Sorting from './Sorting';
 const ProductList = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { data: products, fetchStatus } = useSelector((state) => state.products);
+  const { data: products = [], fetchStatus } = useSelector((state) => state.products);
   const { userData } = useSelector((state) => state.user);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null);
@@ -20,7 +19,7 @@ const ProductList = () => {
   const query = new URLSearchParams(location.search).get('search') || '';
 
   useEffect(() => {
-    if (fetchStatus === '' || fetchStatus === 'error') {
+    if ((fetchStatus === '' || fetchStatus === 'error') && userData?.id) {
       dispatch(fetchAllProducts(`http://localhost:5000/products?userId=${userData.id}&search=${query}`));
     }
   }, [fetchStatus, dispatch, userData, query]);
@@ -48,7 +47,7 @@ const ProductList = () => {
   }
 
   const filteredProducts = products.filter(product =>
-    product.name.toLowerCase().includes(query.toLowerCase())
+    product && product.name.toLowerCase().includes(query.toLowerCase())
   );
 
   const sortedProducts = filteredProducts.sort((a, b) => {
@@ -57,20 +56,17 @@ const ProductList = () => {
         return a.name.localeCompare(b.name);
       case 'name-desc':
         return b.name.localeCompare(a.name);
-      case 'category-asc':
-        return a.category.localeCompare(b.category);
-      case 'category-desc':
-        return b.category.localeCompare(a.category);
-      case 'date-asc':
-        return new Date(a.date) - new Date(b.date);
-      case 'date-desc':
-        return new Date(b.date) - new Date(a.date);
+      case 'price-asc':
+        return a.price - b.price;
+      case 'price-desc':
+        return b.price - a.price;
       default:
         return 0;
     }
   });
 
   const categorizedProducts = sortedProducts.reduce((acc, product) => {
+    if (!product) return acc;
     if (!acc[product.category]) {
       acc[product.category] = [];
     }
@@ -89,10 +85,10 @@ const ProductList = () => {
           <div className="row">
             {categorizedProducts[category].map((product) => (
               <Card
-                key={product.id}
-                id={product.id}
-                name={product.name}
-                imageUrl={product.images[0]}
+                key={product?.id}
+                id={product?.id}
+                name={product?.name}
+                imageUrl={product?.images[0]}
                 onEdit={() => handleEditProduct(product)}
               />
             ))}
