@@ -11,14 +11,14 @@
   ],
   "products": [
     {
-      "id": "1",
       "name": "Iron",
       "quantity": 100,
       "notes": "This is a great product.",
       "category": "Electronics",
       "images": [
         "https://images.philips.com/is/image/philipsconsumer/vrs_906501b50012fc6bb8028a5bb17ddc4ba31675b3?$pnglarge$&wid=960"
-      ]
+      ],
+      "id": "1"
     },
     {
       "id": "2",
@@ -27,17 +27,28 @@
       "notes": "Limited stock available.",
       "category": "Clothing",
       "images": [
-        "https://trendstore.co.za/wp-content/uploads/2021/11/Untitled-1-01.jpg"
+        "https://trendstore.co.za/wp-content/uploads/2021/11/Untitled-1-11-1.jpg"
+      ],
+      "userId": "1"
+    },
+    {
+      "id": "4f6f",
+      "name": "iron",
+      "quantity": "2",
+      "notes": "electronics",
+      "category": "Electronics",
+      "images": [
+        "https://media.4rgos.it/i/Argos/8507392_R_Z001A"
       ]
     },
     {
-      "id": "71e7",
-      "name": "jacket",
+      "id": "0ed2",
+      "name": "Air force1",
       "quantity": "1",
-      "notes": "truytu",
-      "category": "Clothing",
+      "notes": "",
+      "category": "Shoes",
       "images": [
-        "https://m.media-amazon.com/images/I/61FRgVZBhzL._AC_SX385_.jpg"
+        "https://th.bing.com/th/id/OIP.L6bvxRetmROgxwacPD73LwHaE8?rs=1&pid=ImgDetMain"
       ]
     }
   ]

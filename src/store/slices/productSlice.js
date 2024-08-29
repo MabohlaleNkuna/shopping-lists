@@ -1,7 +1,5 @@
-// productSlice.js
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-// Fetch all products
 export const fetchAllProducts = createAsyncThunk(
   "products/fetchAllProducts",
   async (apiUrl) => {
@@ -10,44 +8,44 @@ export const fetchAllProducts = createAsyncThunk(
   }
 );
 
-// Add a product
 export const addProduct = createAsyncThunk(
   "products/addProduct",
-  async (product, { dispatch }) => {
+  async (product, { dispatch, getState }) => {
+    const { user } = getState();
     const response = await fetch('http://localhost:5000/products', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(product),
+      body: JSON.stringify({ ...product, userId: user.userData.id }),
     });
     const newProduct = await response.json();
-    dispatch(fetchAllProducts('http://localhost:5000/products'));
+    dispatch(fetchAllProducts(`http://localhost:5000/products?userId=${user.userData.id}`));
     return newProduct;
   }
 );
 
-// Update a product
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
-  async ({ id, updates }, { dispatch }) => {
+  async ({ id, updates }, { dispatch, getState }) => {
+    const { user } = getState();
     const response = await fetch(`http://localhost:5000/products/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updates),
     });
     const updatedProduct = await response.json();
-    dispatch(fetchAllProducts('http://localhost:5000/products'));
+    dispatch(fetchAllProducts(`http://localhost:5000/products?userId=${user.userData.id}`));
     return updatedProduct;
   }
 );
 
-// Delete a product
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
-  async (id, { dispatch }) => {
+  async (id, { dispatch, getState }) => {
+    const { user } = getState();
     await fetch(`http://localhost:5000/products/${id}`, {
       method: 'DELETE',
     });
-    dispatch(fetchAllProducts('http://localhost:5000/products'));
+    dispatch(fetchAllProducts(`http://localhost:5000/products?userId=${user.userData.id}`));
     return id;
   }
 );

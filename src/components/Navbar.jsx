@@ -1,34 +1,34 @@
+// src/components/Navbar.js
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { userActions } from '../store/slices/userSlice';
 
 const Navbar = () => {
-  const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     dispatch(userActions.logoutUser());
+    navigate('/');
   };
 
   return (
     <nav>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/products">Products</Link></li>
-        
-        {isAuthenticated ? (
-          <>
-            <li><Link to="/profile">Profile</Link></li>
-            <li><button onClick={handleLogout}>Logout</button></li>
-          </>
-        ) : (
-          <>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/register">Register</Link></li>
-          </>
-        )}
-      </ul>
+      <Link to="/">Home</Link>
+      {isAuthenticated ? (
+        <>
+          <Link to="/profile">Profile</Link>
+          <Link to="/products">Products</Link>
+          <button onClick={handleLogout}>Logout</button>
+        </>
+      ) : (
+        <>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
+        </>
+      )}
     </nav>
   );
 };

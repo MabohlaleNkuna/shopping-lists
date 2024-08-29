@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addProduct, updateProduct } from '../store/slices/productSlice';
 
@@ -23,8 +23,9 @@ const ProductForm = ({ product, onClose }) => {
   };
 
   return (
-    <div className="modal">
+    <div className="modal" style={{ display: 'block' }}>
       <div className="modal-content">
+        <span className="close" onClick={onClose}>&times;</span>
         <h2>{product ? 'Update Product' : 'Add New Product'}</h2>
         <form onSubmit={handleSubmit}>
           <label>

@@ -7,14 +7,15 @@ import ProductForm from './ProductForm';
 const ProductList = () => {
   const dispatch = useDispatch();
   const { data: products, fetchStatus } = useSelector((state) => state.products);
+  const { userData } = useSelector((state) => state.user);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null);
 
   useEffect(() => {
     if (fetchStatus === '' || fetchStatus === 'error') {
-      dispatch(fetchAllProducts('http://localhost:5000/products'));
+      dispatch(fetchAllProducts(`http://localhost:5000/products?userId=${userData.id}`));
     }
-  }, [fetchStatus, dispatch]);
+  }, [fetchStatus, dispatch, userData]);
 
   const handleAddProduct = () => {
     setProductToEdit(null);
