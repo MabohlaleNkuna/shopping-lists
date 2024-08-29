@@ -19,7 +19,7 @@ const Card = ({ id, name, price, imageUrl, onEdit }) => {
         </div>
         <div className="card-body text-center">
           <h5 className="card-title">{name}</h5>
-          <p className="card-price">{price}</p> {/* Assuming you want to display the price */}
+        
           <button
             className="btn btn-danger"
             onClick={handleDelete}

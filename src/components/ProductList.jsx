@@ -6,6 +6,7 @@ import Card from './Card';
 import { fetchAllProducts } from '../store/slices/productSlice';
 import ProductForm from './ProductForm';
 import Search from './Search';
+import Sorting from './Sorting';
 
 const ProductList = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const ProductList = () => {
   const { userData } = useSelector((state) => state.user);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null);
+  const [sortOption, setSortOption] = useState(''); // State for sorting option
 
   const query = new URLSearchParams(location.search).get('search') || '';
 
@@ -49,7 +51,26 @@ const ProductList = () => {
     product.name.toLowerCase().includes(query.toLowerCase())
   );
 
-  const categorizedProducts = filteredProducts.reduce((acc, product) => {
+  const sortedProducts = filteredProducts.sort((a, b) => {
+    switch (sortOption) {
+      case 'name-asc':
+        return a.name.localeCompare(b.name);
+      case 'name-desc':
+        return b.name.localeCompare(a.name);
+      case 'category-asc':
+        return a.category.localeCompare(b.category);
+      case 'category-desc':
+        return b.category.localeCompare(a.category);
+      case 'date-asc':
+        return new Date(a.date) - new Date(b.date);
+      case 'date-desc':
+        return new Date(b.date) - new Date(a.date);
+      default:
+        return 0;
+    }
+  });
+
+  const categorizedProducts = sortedProducts.reduce((acc, product) => {
     if (!acc[product.category]) {
       acc[product.category] = [];
     }
@@ -60,6 +81,7 @@ const ProductList = () => {
   return (
     <div className="container product-catalogue">
       <Search />
+      <Sorting sortOption={sortOption} setSortOption={setSortOption} />
       <button onClick={handleAddProduct}>Add New Product</button>
       {Object.keys(categorizedProducts).map((category) => (
         <div key={category}>
