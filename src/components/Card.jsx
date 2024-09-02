@@ -1,4 +1,3 @@
-// src/components/Card.js
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteProduct } from '../store/slices/productSlice';
@@ -19,7 +18,7 @@ const Card = ({ id, name, price, imageUrl, onEdit }) => {
         </div>
         <div className="card-body text-center">
           <h5 className="card-title">{name}</h5>
-        
+          {price && <p className="card-price">${price.toFixed(2)}</p>}
           <button
             className="btn btn-danger"
             onClick={handleDelete}
@@ -29,7 +28,7 @@ const Card = ({ id, name, price, imageUrl, onEdit }) => {
           {onEdit && (
             <button
               className="btn btn-warning mt-2"
-              onClick={() => onEdit(id)}
+              onClick={() => onEdit({ id, name, price, imageUrl })}
             >
               Edit
             </button>

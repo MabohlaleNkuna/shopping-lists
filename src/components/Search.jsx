@@ -1,4 +1,3 @@
-// src/components/Search.js
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
@@ -11,8 +10,10 @@ const Search = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     params.set('search', query);
+    
+    // Use navigate only if the query has changed
     navigate(`${location.pathname}?${params.toString()}`, { replace: true });
-  }, [query, navigate, location]);
+  }, [query, navigate, location.pathname]);
 
   const handleSearch = () => {
     const params = new URLSearchParams(location.search);
@@ -40,14 +41,11 @@ const Search = () => {
         onClick={handleSearch}
         style={{
           backgroundColor: '#004AAD',
+          color: 'white',
           border: 'none',
-          color: '#fff',
-          borderRadius: '4px',
           padding: '8px 12px',
+          borderRadius: '4px',
           cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
         }}
       >
         <FaSearch />

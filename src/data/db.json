@@ -6,61 +6,85 @@
       "password": "password123",
       "name": "John",
       "surname": "Doe",
-      "phoneNumber": "+1234567890"
-    }
-  ],
-  "products": [
-    {
-      "id": "2",
-      "name": "Summer Long Dress",
-      "quantity": 50,
-      "notes": "Limited stock available.",
-      "category": "Clothing",
-      "images": [
-        "https://trendstore.co.za/wp-content/uploads/2021/11/Untitled-1-11-1.jpg"
-      ],
-      "userId": "1",
-      "date": "2024-08-29"
-    },
-    {
-      "id": "4cc0",
-      "name": "Air force1",
-      "quantity": "1",
-      "notes": "jjhhhhh",
-      "category": "Shoes",
-      "images": [
-        "https://th.bing.com/th/id/OIP.L6bvxRetmROgxwacPD73LwHaE8?rs=1&pid=ImgDetMain"
+      "phoneNumber": "+1234567890",
+      "products": [
+        {
+          "id": "2",
+          "name": "Summer Long Dress",
+          "quantity": 50,
+          "notes": "Limited stock available.",
+          "category": "Clothing",
+          "images": [
+            "https://trendstore.co.za/wp-content/uploads/2021/11/Untitled-1-11-1.jpg"
+          ],
+          "userId": "1",
+          "date": "2024-08-29"
+        },
+        {
+          "id": "4cc0",
+          "name": "Air force1",
+          "quantity": 1,
+          "notes": "jjhhhhh",
+          "category": "Shoes",
+          "images": [
+            "https://th.bing.com/th/id/OIP.L6bvxRetmROgxwacPD73LwHaE8?rs=1&pid=ImgDetMain"
+          ],
+          "userId": "1"
+        }
       ]
     },
     {
-      "id": "9874",
-      "name": "Goldair Glass Kettle 1.8L",
-      "quantity": "2",
-      "notes": "",
-      "category": "Electronics",
-      "images": [
-        "https://img.kwcdn.com/product/1e78ea097e/fd2af9b3-3c6b-43e3-9b1e-871f35610d79_800x800.jpeg?imageView2/2/w/800/q/70/format/webp"
+      "id": "e826",
+      "email": "mabohlalenkuna@gmail.com",
+      "password": "999999",
+      "name": "leon",
+      "surname": "nkuna",
+      "products": [
+        {
+          "id": "9874",
+          "name": "Goldair Glass Kettle 1.8L",
+          "quantity": 2,
+          "notes": "",
+          "category": "Electronics",
+          "images": [
+            "https://img.kwcdn.com/product/1e78ea097e/fd2af9b3-3c6b-43e3-9b1e-871f35610d79_800x800.jpeg?imageView2/2/w/800/q/70/format/webp"
+          ]
+        },
+        {
+          "id": "e99c",
+          "name": "Goldair Glass Kettle 1.8L",
+          "quantity": 1,
+          "notes": "",
+          "category": "Shoes",
+          "images": [
+            "https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/18102a835c5ae8f0ce143e44429db741.jpg?imageView2/2/w/800/q/70/format/webp"
+          ]
+        },
+        {
+          "id": "5f46",
+          "name": "Goldair Glass Kettle 1.8L",
+          "quantity": 1,
+          "notes": "",
+          "category": "Shoes",
+          "images": [
+            "https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/18102a835c5ae8f0ce143e44429db741.jpg?imageView2/2/w/800/q/70/format/webp"
+          ]
+        }
       ]
     },
     {
-      "id": "e99c",
-      "name": "Goldair Glass Kettle 1.8L",
-      "quantity": "1",
-      "notes": "",
-      "category": "SHOES",
-      "images": [
-        "https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/18102a835c5ae8f0ce143e44429db741.jpg?imageView2/2/w/800/q/70/format/webp"
-      ]
+      "id": "a001",
+      "email": "mabojlalenkuna@gmail.com",
+      "password": "111111",
+      "name": "leon",
+      "surname": "mabohlalenkuna@gmail.com"
     },
     {
-      "id": "5f46",
-      "name": "Goldair Glass Kettle 1.8L",
-      "quantity": "1",
-      "notes": "",
-      "category": "SHOES",
-      "images": [
-        "https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/18102a835c5ae8f0ce143e44429db741.jpg?imageView2/2/w/800/q/70/format/webp"
-      ]
+      "id": "5fd5",
+      "email": "mabojlalenkuna@gmail.com",
+      "password": "000000",
+      "name": "leon",
+      "surname": "mabohlalenkuna@gmail.com"
     }
   ]
 }

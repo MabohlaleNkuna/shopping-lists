@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { userActions } from '../store/slices/userSlice';
-import { Modal, Button, Form } from 'react-bootstrap'; // Import react-bootstrap components
+import { updateUser } from '../store/slices/userSlice';
+import { Modal, Button, Form } from 'react-bootstrap';
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const ProfilePage = () => {
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
-  const [showModal, setShowModal] = useState(false); // State to control the modal visibility
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (userData) {
@@ -24,9 +24,9 @@ const ProfilePage = () => {
   }, [userData]);
 
   const handleUpdate = () => {
-    const updatedData = { name, surname, email, phoneNumber, password };
-    dispatch(userActions.updateUser(updatedData));
-    setShowModal(false); // Close the modal after updating
+    const updatedData = { ...userData, name, surname, email, phoneNumber, password }; // Include user ID
+    dispatch(updateUser(updatedData));
+    setShowModal(false);
   };
 
   return (
@@ -38,13 +38,12 @@ const ProfilePage = () => {
           <p>Surname: {userData.surname}</p>
           <p>Email: {userData.email}</p>
           <p>Phone: {userData.phoneNumber || 'N/A'}</p>
-          <Button variant="primary" onClick={() => setShowModal(true)}>Update Profile</Button> {/* Open the modal */}
+          <Button variant="primary" onClick={() => setShowModal(true)}>Update Profile</Button>
         </div>
       ) : (
         <p>No user data available.</p>
       )}
 
-      {/* Modal for updating profile */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Update Profile</Modal.Title>

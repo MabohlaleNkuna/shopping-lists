@@ -13,7 +13,7 @@ const saveProductsToLocalStorage = (products) => {
 
 export const fetchAllProducts = createAsyncThunk(
   "products/fetchAllProducts",
-  async (apiUrl, { dispatch }) => {
+  async (apiUrl) => {
     const response = await fetch(apiUrl);
     const data = await response.json();
     saveProductsToLocalStorage(data); // Save fetched products to localStorage
@@ -23,7 +23,7 @@ export const fetchAllProducts = createAsyncThunk(
 
 export const addProduct = createAsyncThunk(
   "products/addProduct",
-  async (product, { dispatch, getState }) => {
+  async (product, { getState }) => {
     const { user } = getState();
     const response = await fetch('http://localhost:5000/products', {
       method: 'POST',
@@ -39,12 +39,11 @@ export const addProduct = createAsyncThunk(
 
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
-  async ({ id, updates }, { dispatch, getState }) => {
-    const { user } = getState();
+  async ({ id, updates }) => {
     const response = await fetch(`http://localhost:5000/products/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...updates, userId: user.userData.id }),
+      body: JSON.stringify(updates),
     });
     const updatedProduct = await response.json();
     const products = loadProductsFromLocalStorage().map(product =>
@@ -57,7 +56,7 @@ export const updateProduct = createAsyncThunk(
 
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
-  async (id, { dispatch }) => {
+  async (id) => {
     await fetch(`http://localhost:5000/products/${id}`, {
       method: 'DELETE',
     });
@@ -73,7 +72,6 @@ const productSlice = createSlice({
     data: loadProductsFromLocalStorage(),
     fetchStatus: "",
   },
-  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllProducts.fulfilled, (state, action) => {

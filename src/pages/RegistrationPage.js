@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { userActions } from '../store/slices/userSlice';
+import { registerUser } from '../store/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
-
 
 const RegistrationPage = () => {
   const [email, setEmail] = useState('');
@@ -17,23 +16,20 @@ const RegistrationPage = () => {
     const newErrors = {};
     if (!name) newErrors.name = 'Name is required';
     if (!surname) newErrors.surname = 'Surname is required';
-    else if(surname.length <3) newErrors.surname = 'Surname must be at least 3 characters';
+    else if (surname.length < 3) newErrors.surname = 'Surname must be at least 3 characters';
     if (!email) newErrors.email = 'Email is required';
     else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = 'Email is invalid';
     if (!password) newErrors.password = 'Password is required';
     else if (password.length < 6) newErrors.password = 'Password must be at least 6 characters';
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleRegister = () => {
     if (validateForm()) {
-      
       const userData = { email, password, name, surname };
-
-      dispatch(userActions.registerUser(userData));
-      navigate('/profile');
+      dispatch(registerUser(userData)).then(() => navigate('/profile'));
     }
   };
 
@@ -76,7 +72,6 @@ const RegistrationPage = () => {
           className="form-input"
         />
         {errors.password && <p className="error-message">{errors.password}</p>}
-        
         
         <button onClick={handleRegister} className="register-button">Register</button>
       </div>

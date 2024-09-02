@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { userActions } from '../store/slices/userSlice';
+import { logoutUser } from '../store/slices/userSlice'; // Import the specific action
 
 const Navbar = () => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
@@ -10,7 +10,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(userActions.logoutUser());
+    dispatch(logoutUser()); // Use the specific action directly
     navigate('/');
   };
 

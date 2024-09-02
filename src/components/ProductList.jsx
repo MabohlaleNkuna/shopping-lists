@@ -10,11 +10,11 @@ import Sorting from './Sorting';
 const ProductList = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { data: products = [], fetchStatus } = useSelector((state) => state.products);
-  const { userData } = useSelector((state) => state.user);
+  const { data: users = [], fetchStatus = '' } = useSelector((state) => state.users || {});
+  const { userData } = useSelector((state) => state.user) || {};
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null);
-  const [sortOption, setSortOption] = useState(''); // State for sorting option
+  const [sortOption, setSortOption] = useState('');
 
   const query = new URLSearchParams(location.search).get('search') || '';
 
@@ -46,8 +46,11 @@ const ProductList = () => {
     return <div>Error loading products.</div>;
   }
 
+  const currentUser = users.find(user => user.id === userData?.id);
+  const products = currentUser ? currentUser.products : [];
+
   const filteredProducts = products.filter(product =>
-    product && product.name.toLowerCase().includes(query.toLowerCase())
+    product.name.toLowerCase().includes(query.toLowerCase())
   );
 
   const sortedProducts = filteredProducts.sort((a, b) => {
@@ -56,17 +59,16 @@ const ProductList = () => {
         return a.name.localeCompare(b.name);
       case 'name-desc':
         return b.name.localeCompare(a.name);
-      case 'price-asc':
-        return a.price - b.price;
-      case 'price-desc':
-        return b.price - a.price;
+      case 'quantity-asc':
+        return a.quantity - b.quantity; 
+      case 'quantity-desc':
+        return b.quantity - a.quantity; 
       default:
         return 0;
     }
   });
 
   const categorizedProducts = sortedProducts.reduce((acc, product) => {
-    if (!product) return acc;
     if (!acc[product.category]) {
       acc[product.category] = [];
     }
@@ -75,27 +77,21 @@ const ProductList = () => {
   }, {});
 
   return (
-    <div className="container product-catalogue">
+    <div>
       <Search />
-      <Sorting sortOption={sortOption} setSortOption={setSortOption} />
+      <Sorting onSort={setSortOption} />
       <button onClick={handleAddProduct}>Add New Product</button>
-      {Object.keys(categorizedProducts).map((category) => (
+      {Object.keys(categorizedProducts).map(category => (
         <div key={category}>
           <h2>{category}</h2>
-          <div className="row">
-            {categorizedProducts[category].map((product) => (
-              <Card
-                key={product?.id}
-                id={product?.id}
-                name={product?.name}
-                imageUrl={product?.images[0]}
-                onEdit={() => handleEditProduct(product)}
-              />
-            ))}
-          </div>
+          {categorizedProducts[category].map(product => (
+            <Card key={product.id} id={product.id} name={product.name} price={product.price} imageUrl={product.images[0]} onEdit={() => handleEditProduct(product)} />
+          ))}
         </div>
       ))}
-      {isFormVisible && <ProductForm product={productToEdit} onClose={handleCloseForm} />}
+      {isFormVisible && (
+        <ProductForm product={productToEdit} onClose={handleCloseForm} />
+      )}
     </div>
   );
 };
