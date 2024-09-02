@@ -9,12 +9,10 @@ import Profile from './pages/Profile';
 import Register from './pages/Register';
 import AddProduct from './components/AddProduct';
 import Products from './pages/Products';
-import ShoppingList from './components/ShoppingList';
 import Home from './pages/Home';
 
 const App = () => {
   const user = useSelector((state) => state.user);
-
   return (
     <Provider store={store}>
       <Router>
@@ -29,7 +27,6 @@ const App = () => {
             <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
             <Route path="/products" element={user ? <Products /> : <Navigate to="/login" />} />
             <Route path="/add-product" element={user ? <AddProduct /> : <Navigate to="/login" />} />
-            <Route path="/shopping-list" element={user ? <ShoppingList /> : <Navigate to="/login" />} />
           </Routes>
         </div>
       </Router>

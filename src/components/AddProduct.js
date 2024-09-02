@@ -1,6 +1,6 @@
 // src/components/AddProductModal.js
 import React, { useState } from 'react';
-import './AddProductModal.css';
+
 
 const AddProduct = ({ isOpen, onClose, onAddProduct }) => {
   const [productName, setProductName] = useState('');

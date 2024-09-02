@@ -2,16 +2,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchEntities, createEntity } from '../actions/crud';
-import ProductCard from './ProductCard'; // Assuming you have a ProductCard component
-import ProductDetails from './ProductDetails'; // Import the ProductDetails component
-import AddProductModal from './AddProductModal'; // Import the AddProductModal component
+import ProductCard from '../components/ProductCard'; 
+import ProductDetails from '../components/ProductDetails'; 
+import AddProduct from '../components/AddProduct'; 
 import { useNavigate } from 'react-router-dom';
-import './Home.css'; // Import CSS for styles
 
 const Products = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.user);
   const { data, loading, error } = useSelector((state) => state.crud.products || { data: [], loading: false, error: null });
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -122,7 +121,7 @@ const Products = () => {
       )}
 
       {/* Render AddProductModal */}
-      <AddProductModal
+      <AddProduct
         isOpen={showModal}
         onClose={() => setShowModal(false)}
         onAddProduct={handleAddProduct}

@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../services/auth';
 import { FaShoppingCart } from 'react-icons/fa'; // Import cart icon from react-icons
-import './Navbar.css'; // Import CSS for styling
+
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.user);
   const shoppingList = useSelector((state) => state.shoppingList); // Access shopping list from Redux state
   const [showCart, setShowCart] = useState(false); // State to manage cart visibility
 
@@ -29,11 +29,7 @@ const Navbar = () => {
         )}
       </ul>
 
-      {/* Cart Icon Button */}
-      <button className="cart-icon" onClick={() => setShowCart(!showCart)}>
-        <FaShoppingCart size={24} />
-        {shoppingList.length > 0 && <span className="cart-count">{shoppingList.length}</span>}
-      </button>
+
 
       {/* Shopping List Modal */}
       {showCart && (

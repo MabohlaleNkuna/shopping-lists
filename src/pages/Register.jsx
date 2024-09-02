@@ -10,7 +10,7 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const error = useSelector((state) => state.auth.error);
+  const error = useSelector((state) => state.error);
 
   const handleSubmit = (e) => {
     e.preventDefault();
