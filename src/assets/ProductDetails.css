@@ -1,0 +1,50 @@
+/* src/components/ProductDetails.css */
+.product-details-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .product-details-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .close-btn {
+    background: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+  }
+  
+  .close-btn:hover {
+    background: #ff1a1a;
+  }
+
+  
+  .add-to-shopping-list-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .add-to-shopping-list-btn:hover {
+    background: #45a049;
+  }

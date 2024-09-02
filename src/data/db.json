@@ -2,11 +2,25 @@
   "users": [
     {
       "id": "1",
-      "email": "test@example.com",
-      "password": "password123",
+      "email": "test@test.com",
+      "password": "123",
       "name": "John",
       "surname": "Doe",
       "phoneNumber": "+1234567890"
+    },
+    {
+      "id": "d1c2",
+      "email": "t@t.com",
+      "password": "123456",
+      "name": "ggg",
+      "surname": "ggg",
+      "phoneNumber": "+1234567890"
+    },
+    {
+      "id": "6868",
+      "username": "wise",
+      "email": "mabohlalenkunagg@gmail.com",
+      "password": "123456"
     }
   ],
   "products": [
@@ -23,44 +37,15 @@
       "date": "2024-08-29"
     },
     {
-      "id": "4cc0",
-      "name": "Air force1",
+      "id": "2078",
+      "name": "jhxhvjh",
       "quantity": "1",
-      "notes": "jjhhhhh",
-      "category": "Shoes",
+      "notes": "dsduygsuygd",
+      "category": "food",
       "images": [
-        "https://th.bing.com/th/id/OIP.L6bvxRetmROgxwacPD73LwHaE8?rs=1&pid=ImgDetMain"
-      ]
-    },
-    {
-      "id": "9874",
-      "name": "Goldair Glass Kettle 1.8L",
-      "quantity": "2",
-      "notes": "",
-      "category": "Electronics",
-      "images": [
-        "https://img.kwcdn.com/product/1e78ea097e/fd2af9b3-3c6b-43e3-9b1e-871f35610d79_800x800.jpeg?imageView2/2/w/800/q/70/format/webp"
-      ]
-    },
-    {
-      "id": "e99c",
-      "name": "Goldair Glass Kettle 1.8L",
-      "quantity": "1",
-      "notes": "",
-      "category": "SHOES",
-      "images": [
-        "https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/18102a835c5ae8f0ce143e44429db741.jpg?imageView2/2/w/800/q/70/format/webp"
-      ]
-    },
-    {
-      "id": "5f46",
-      "name": "Goldair Glass Kettle 1.8L",
-      "quantity": "1",
-      "notes": "",
-      "category": "SHOES",
-      "images": [
-        "https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/18102a835c5ae8f0ce143e44429db741.jpg?imageView2/2/w/800/q/70/format/webp"
-      ]
+        "https://images.app.goo.gl/XKCEWLPPQEXxAoBk6"
+      ],
+      "userId": "9359"
     }
   ]
 }

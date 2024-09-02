@@ -1,29 +1,39 @@
+// src/App.js
 import React from 'react';
+import { Provider, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import store from './store';
 import Navbar from './components/Navbar';
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import RegistrationPage from './pages/RegistrationPage';
-import ProfilePage from './pages/ProfilePage';
-import ProductList from './components/ProductList';
-
-import './App.css'
+import Login from './pages/Login';
+import Profile from './pages/Profile';
+import Register from './pages/Register';
+import AddProduct from './components/AddProduct';
+import Products from './pages/Products';
+import ShoppingList from './components/ShoppingList';
+import Home from './pages/Home';
 
 const App = () => {
-  const { isAuthenticated } = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
 
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={isAuthenticated ? <Navigate to="/profile" /> : <LoginPage />} />
-        <Route path="/register" element={isAuthenticated ? <Navigate to="/profile" /> : <RegistrationPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/products" element={<ProductList />} />
-      </Routes>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Navbar />
+        <div className="App">
+          <Routes>
+            {/* Define route for the home page with "/home" path */}
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/login" element={user ? <Navigate to="/profile" /> : <Login />} />
+            <Route path="/register" element={user ? <Navigate to="/profile" /> : <Register />} />
+            <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" />} />
+            <Route path="/products" element={user ? <Products /> : <Navigate to="/login" />} />
+            <Route path="/add-product" element={user ? <AddProduct /> : <Navigate to="/login" />} />
+            <Route path="/shopping-list" element={user ? <ShoppingList /> : <Navigate to="/login" />} />
+          </Routes>
+        </div>
+      </Router>
+    </Provider>
   );
 };
 
