@@ -85,6 +85,84 @@
       "password": "000000",
       "name": "leon",
       "surname": "mabohlalenkuna@gmail.com"
+    },
+    {
+      "id": "f12f",
+      "email": "mabo@gmail.com",
+      "password": "111111",
+      "name": "leon",
+      "surname": "nkuna"
+    },
+    {
+      "id": "be03",
+      "email": "mabo@gmail.com",
+      "password": "000000",
+      "name": "wwww",
+      "surname": "mabo@gmail.com"
+    },
+    {
+      "id": "a440",
+      "email": "m@gmail.com",
+      "password": "zzzzzz",
+      "name": "llw",
+      "surname": "nlw"
+    }
+  ],
+  "products": [
+    {
+      "id": "f679",
+      "name": "rrr",
+      "quantity": 500,
+      "notes": "",
+      "category": "electr",
+      "images": [
+        "https://www.psabrowse.com/catalog/image_download.php?i=40989.jpg"
+      ],
+      "userId": "f12f"
+    },
+    {
+      "id": "e38a",
+      "name": "rrr",
+      "quantity": 500,
+      "notes": "",
+      "category": "electr",
+      "images": [
+        "https://www.psabrowse.com/catalog/image_download.php?i=40989.jpg"
+      ],
+      "userId": "f12f"
+    },
+    {
+      "id": "bc33",
+      "name": "rrr",
+      "quantity": 500,
+      "notes": "",
+      "category": "electr",
+      "images": [
+        "https://www.psabrowse.com/catalog/image_download.php?i=40989.jpg"
+      ],
+      "userId": "be03"
+    },
+    {
+      "id": "028e",
+      "name": "rrr",
+      "quantity": 500,
+      "notes": "",
+      "category": "electr",
+      "images": [
+        "https://www.psabrowse.com/catalog/image_download.php?i=40989.jpg"
+      ],
+      "userId": "a440"
+    },
+    {
+      "id": "f2a8",
+      "name": "eee",
+      "quantity": -2,
+      "notes": "e",
+      "category": "ee",
+      "images": [
+        "ee"
+      ],
+      "userId": "a440"
     }
   ]
 }

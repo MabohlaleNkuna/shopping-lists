@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, updateProduct } from '../store/slices/productSlice';
 
 const ProductForm = ({ product, onClose }) => {
-  const { userData } = useSelector((state) => state.user) || {};
+  const { userData } = useSelector((state) => state?.user) || {};
   const [name, setName] = useState(product ? product.name : '');
   const [quantity, setQuantity] = useState(product ? product.quantity : '');
   const [notes, setNotes] = useState(product ? product.notes : '');

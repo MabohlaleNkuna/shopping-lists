@@ -15,9 +15,14 @@ const ProductList = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null);
   const [sortOption, setSortOption] = useState('');
+  const productsData = useSelector((state) => state.products.data) || [];
 
   const query = new URLSearchParams(location.search).get('search') || '';
-
+  useEffect(() => {
+    if (userData?.id) {
+      dispatch(fetchAllProducts(`http://localhost:5000/products?userId=${userData.id}`));
+    }
+  }, [dispatch, userData]);
   useEffect(() => {
     if ((fetchStatus === '' || fetchStatus === 'error') && userData?.id) {
       dispatch(fetchAllProducts(`http://localhost:5000/products?userId=${userData.id}&search=${query}`));
@@ -46,10 +51,12 @@ const ProductList = () => {
     return <div>Error loading products.</div>;
   }
 
-  const currentUser = users.find(user => user.id === userData?.id);
+  const currentUser  =users.find(user => user.id === userData?.id);
   const products = currentUser ? currentUser.products : [];
 
-  const filteredProducts = products.filter(product =>
+  const products2 = productsData.filter(product => product.userId === userData.id);
+console.log(products2)
+  const filteredProducts = products2.filter(product =>
     product.name.toLowerCase().includes(query.toLowerCase())
   );
 
@@ -75,13 +82,14 @@ const ProductList = () => {
     acc[product.category].push(product);
     return acc;
   }, {});
+  //console.log(productsData)
 
   return (
     <div>
       <Search />
       <Sorting onSort={setSortOption} />
       <button onClick={handleAddProduct}>Add New Product</button>
-      {Object.keys(categorizedProducts).map(category => (
+      { Object.keys(categorizedProducts).map(category => (
         <div key={category}>
           <h2>{category}</h2>
           {categorizedProducts[category].map(product => (
