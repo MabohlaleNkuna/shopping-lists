@@ -25,12 +25,12 @@ const ProductList = () => {
   }, [dispatch, userData]);
 
   const handleAddProduct = () => {
-    setCurrentProduct(null);
-    setIsFormVisible(true);
+    setCurrentProduct(null); // Reset current product for adding new
+    setIsFormVisible(true);  // Show the form
   };
 
   const handleCloseForm = () => {
-    setIsFormVisible(false);
+    setIsFormVisible(false); // Hide the form
   };
 
   const filteredProducts = productsData.filter((product) =>
@@ -65,8 +65,8 @@ const ProductList = () => {
             name={product.name}
             imageUrl={product.images[0]}
             onEdit={() => {
-              setCurrentProduct(product);
-              setIsFormVisible(true);
+              setCurrentProduct(product);  // Set the selected product
+              setIsFormVisible(true);      // Open the form for editing
             }}
           />
         ))}

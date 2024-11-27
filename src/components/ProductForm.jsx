@@ -1,25 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProduct } from '../store/slices/productSlice';
+import { addProduct, updateProduct } from '../store/slices/productSlice';
 
-const ProductForm = ({ onClose }) => {
+const ProductForm = ({ onClose, product }) => {
   const { userData } = useSelector((state) => state?.user) || {};
-  const [products, setProducts] = useState([{ name: '', quantity: '', notes: '', category: '', images: '' }]);
+  const [formProduct, setFormProduct] = useState({
+    name: '',
+    quantity: '',
+    notes: '',
+    category: '',
+    images: '',
+  });
   const dispatch = useDispatch();
 
-  const handleChange = (index, field, value) => {
-    const updatedProducts = [...products];
-    updatedProducts[index][field] = value;
-    setProducts(updatedProducts);
-  };
+  // If a product is passed for editing, pre-fill the form
+  useEffect(() => {
+    if (product) {
+      setFormProduct({
+        name: product.name || '',
+        quantity: product.quantity || '',
+        notes: product.notes || '',
+        category: product.category || '',
+        images: product.images.join(', ') || '',
+      });
+    }
+  }, [product]);
 
-  const handleAddRow = () => {
-    setProducts([...products, { name: '', quantity: '', notes: '', category: '', images: '' }]);
-  };
-
-  const handleRemoveRow = (index) => {
-    const updatedProducts = products.filter((_, i) => i !== index);
-    setProducts(updatedProducts);
+  const handleChange = (field, value) => {
+    setFormProduct({
+      ...formProduct,
+      [field]: value,
+    });
   };
 
   const handleSubmit = (e) => {
@@ -29,16 +40,29 @@ const ProductForm = ({ onClose }) => {
       return;
     }
 
-    const productData = products.map(product => ({
-      ...product,
-      quantity: parseInt(product.quantity, 10),
-      images: product.images.split(','),
+    const updatedProduct = {
+      ...formProduct,
+      quantity: parseInt(formProduct.quantity, 10),
+      images: formProduct.images.split(','),
       userId: userData.id,
-    }));
-    
-    dispatch(addProduct(productData));
-    setProducts([{ name: '', quantity: '', notes: '', category: '', images: '' }]); // Reset form
-    onClose();
+    };
+
+    if (product) {
+      // If a product is being edited, dispatch the update action
+      dispatch(updateProduct({ id: product.id, updates: updatedProduct }));
+    } else {
+      // Otherwise, add a new product
+      dispatch(addProduct([updatedProduct]));
+    }
+
+    setFormProduct({
+      name: '',
+      quantity: '',
+      notes: '',
+      category: '',
+      images: '',
+    }); // Reset form
+    onClose(); // Close the form
   };
 
   return (
@@ -47,61 +71,51 @@ const ProductForm = ({ onClose }) => {
         <span className="close" onClick={onClose} style={{ cursor: 'pointer' }}>
           &times;
         </span>
-        <h2>Add New Products</h2>
+        <h2>{product ? 'Update Product' : 'Add New Product'}</h2>
         <form onSubmit={handleSubmit}>
-          {products.map((product, index) => (
-            <div key={index}>
-              <label>
-                Name:
-                <input
-                  type="text"
-                  value={product.name}
-                  onChange={(e) => handleChange(index, 'name', e.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Quantity:
-                <input
-                  type="number"
-                  value={product.quantity}
-                  onChange={(e) => handleChange(index, 'quantity', e.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Notes:
-                <textarea
-                  value={product.notes}
-                  onChange={(e) => handleChange(index, 'notes', e.target.value)}
-                />
-              </label>
-              <label>
-                Category:
-                <input
-                  type="text"
-                  value={product.category}
-                  onChange={(e) => handleChange(index, 'category', e.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                Images:
-                <input
-                  type="text"
-                  value={product.images}
-                  onChange={(e) => handleChange(index, 'images', e.target.value)}
-                />
-              </label>
-              {products.length > 1 && (
-                <button type="button" onClick={() => handleRemoveRow(index)}>Remove</button>
-              )}
-            </div>
-          ))}
-          <button type="button" onClick={handleAddRow}>
-            Add Another Product
-          </button>
-          <button type="submit">Save Products</button>
+          <label>
+            Name:
+            <input
+              type="text"
+              value={formProduct.name}
+              onChange={(e) => handleChange('name', e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Quantity:
+            <input
+              type="number"
+              value={formProduct.quantity}
+              onChange={(e) => handleChange('quantity', e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Notes:
+            <textarea
+              value={formProduct.notes}
+              onChange={(e) => handleChange('notes', e.target.value)}
+            />
+          </label>
+          <label>
+            Category:
+            <input
+              type="text"
+              value={formProduct.category}
+              onChange={(e) => handleChange('category', e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Images (comma-separated):
+            <input
+              type="text"
+              value={formProduct.images}
+              onChange={(e) => handleChange('images', e.target.value)}
+            />
+          </label>
+          <button type="submit">{product ? 'Update Product' : 'Save Product'}</button>
         </form>
       </div>
     </div>
