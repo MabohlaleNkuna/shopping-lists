@@ -10,32 +10,20 @@ import Sorting from './Sorting';
 const ProductList = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { data: users = [], fetchStatus = '' } = useSelector((state) => state.users || {});
   const { userData } = useSelector((state) => state.user) || {};
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const [productToEdit, setProductToEdit] = useState(null);
   const [sortOption, setSortOption] = useState('');
   const productsData = useSelector((state) => state.products.data) || [];
 
   const query = new URLSearchParams(location.search).get('search') || '';
+
   useEffect(() => {
     if (userData?.id) {
-      dispatch(fetchAllProducts(`http://localhost:5000/products?userId=${userData.id}`));
+      dispatch(fetchAllProducts(`http://localhost:5001/products?userId=${userData.id}`));
     }
   }, [dispatch, userData]);
-  useEffect(() => {
-    if ((fetchStatus === '' || fetchStatus === 'error') && userData?.id) {
-      dispatch(fetchAllProducts(`http://localhost:5000/products?userId=${userData.id}&search=${query}`));
-    }
-  }, [fetchStatus, dispatch, userData, query]);
 
   const handleAddProduct = () => {
-    setProductToEdit(null);
-    setIsFormVisible(true);
-  };
-
-  const handleEditProduct = (product) => {
-    setProductToEdit(product);
     setIsFormVisible(true);
   };
 
@@ -43,20 +31,7 @@ const ProductList = () => {
     setIsFormVisible(false);
   };
 
-  if (fetchStatus === 'pending') {
-    return <div>Loading...</div>;
-  }
-
-  if (fetchStatus === 'error') {
-    return <div>Error loading products.</div>;
-  }
-
-  const currentUser  =users.find(user => user.id === userData?.id);
-  const products = currentUser ? currentUser.products : [];
-
-  const products2 = productsData.filter(product => product.userId === userData.id);
-console.log(products2)
-  const filteredProducts = products2.filter(product =>
+  const filteredProducts = productsData.filter(product =>
     product.name.toLowerCase().includes(query.toLowerCase())
   );
 
@@ -75,30 +50,18 @@ console.log(products2)
     }
   });
 
-  const categorizedProducts = sortedProducts.reduce((acc, product) => {
-    if (!acc[product.category]) {
-      acc[product.category] = [];
-    }
-    acc[product.category].push(product);
-    return acc;
-  }, {});
-  //console.log(productsData)
-
   return (
     <div>
       <Search />
-      <Sorting onSort={setSortOption} />
+      <Sorting sortOption={sortOption} setSortOption={setSortOption} />
       <button onClick={handleAddProduct}>Add New Product</button>
-      { Object.keys(categorizedProducts).map(category => (
-        <div key={category}>
-          <h2>{category}</h2>
-          {categorizedProducts[category].map(product => (
-            <Card key={product.id} id={product.id} name={product.name} price={product.price} imageUrl={product.images[0]} onEdit={() => handleEditProduct(product)} />
-          ))}
-        </div>
-      ))}
+      <div>
+        {sortedProducts.map(product => (
+          <Card key={product.id} id={product.id} name={product.name} imageUrl={product.images[0]} />
+        ))}
+      </div>
       {isFormVisible && (
-        <ProductForm product={productToEdit} onClose={handleCloseForm} />
+        <ProductForm onClose={handleCloseForm} />
       )}
     </div>
   );

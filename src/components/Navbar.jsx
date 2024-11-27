@@ -1,46 +1,54 @@
 // src/components/Navbar.js
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { logoutUser } from '../store/slices/userSlice'; // Import the specific action
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from "../store/slices/userSlice";
 
 const Navbar = () => {
-  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const { isAuthenticated } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logoutUser()); // Use the specific action directly
-    navigate('/');
+    dispatch(logoutUser());
+    navigate("/");
   };
 
   return (
-    <nav style={{
-      display: 'flex',
-      justifyContent: 'space-around',
-      alignItems: 'center',
-      padding: '10px 20px',
-      backgroundColor: '#004AAD',
-      color: '#FFF',
-      position: 'fixed',
-      width: '100%',
-      top: 0,
-      zIndex: 1000,
-    }}>
-      <div style={{ display: 'flex', gap: '20px' }}>
-        <Link to="/" style={{ color: '#FFF', textDecoration: 'none' }}>Home</Link>
+    <nav
+      style={{
+        display: "flex",
+        justifyContent: "space-around",
+        alignItems: "center",
+        padding: "10px 20px",
+        backgroundColor: "#004AAD",
+        color: "#FFF",
+        position: "fixed",
+        width: "100%",
+        top: 0,
+        zIndex: 1000,
+      }}
+    >
+      <div style={{ display: "flex", gap: "20px" }}>
+        <Link to="/" style={{ color: "#FFF", textDecoration: "none" }}>
+          Home
+        </Link>
         {isAuthenticated ? (
           <>
-            <Link to="/profile" style={{ color: '#FFF', textDecoration: 'none' }}>Profile</Link>
-            <Link to="/products" style={{ color: '#FFF', textDecoration: 'none' }}>Products</Link>
-            <button 
-              onClick={handleLogout} 
-              style={{ 
-                background: 'none', 
-                border: 'none', 
-                color: '#FFF', 
-                cursor: 'pointer',
-                padding: '0',
+            <Link to="/profile" style={{ color: "#FFF", textDecoration: "none" }}>
+              Profile
+            </Link>
+            <Link to="/products" style={{ color: "#FFF", textDecoration: "none" }}>
+              Products
+            </Link>
+            <button
+              onClick={handleLogout}
+              style={{
+                background: "none",
+                border: "none",
+                color: "#FFF",
+                cursor: "pointer",
+                padding: "0",
               }}
             >
               Logout
@@ -48,8 +56,12 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            <Link to="/login" style={{ color: '#FFF', textDecoration: 'none' }}>Login</Link>
-            <Link to="/register" style={{ color: '#FFF', textDecoration: 'none' }}>Register</Link>
+            <Link to="/login" style={{ color: "#FFF", textDecoration: "none" }}>
+              Login
+            </Link>
+            <Link to="/register" style={{ color: "#FFF", textDecoration: "none" }}>
+              Register
+            </Link>
           </>
         )}
       </div>

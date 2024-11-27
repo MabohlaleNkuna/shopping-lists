@@ -24,7 +24,7 @@ const ProfilePage = () => {
   }, [userData]);
 
   const handleUpdate = () => {
-    const updatedData = { ...userData, name, surname, email, phoneNumber, password }; // Include user ID
+    const updatedData = { ...userData, name, surname, email, phoneNumber, password }; 
     dispatch(updateUser(updatedData));
     setShowModal(false);
   };

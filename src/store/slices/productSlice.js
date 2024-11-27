@@ -11,36 +11,39 @@ const saveProductsToLocalStorage = (products) => {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(products));
 };
 
+// Thunks
 export const fetchAllProducts = createAsyncThunk(
   "products/fetchAllProducts",
   async (apiUrl) => {
     const response = await fetch(apiUrl);
     const data = await response.json();
-    saveProductsToLocalStorage(data); // Save fetched products to localStorage
+    saveProductsToLocalStorage(data);
     return data;
   }
 );
 
 export const addProduct = createAsyncThunk(
   "products/addProduct",
-  async (product, { getState }) => {
-    const { user } = getState();
-    const response = await fetch('http://localhost:5000/products', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...product, userId: user.userData.id }),
-    });
-    const newProduct = await response.json();
-    const products = [...loadProductsFromLocalStorage(), newProduct];
-    saveProductsToLocalStorage(products);
-    return newProduct;
+  async (products) => {
+    const responses = await Promise.all(
+      products.map(product =>
+        fetch('http://localhost:5001/products', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(product),
+        }).then(res => res.json())
+      )
+    );
+    const allProducts = [...loadProductsFromLocalStorage(), ...responses];
+    saveProductsToLocalStorage(allProducts);
+    return responses;
   }
 );
 
 export const updateProduct = createAsyncThunk(
   "products/updateProduct",
   async ({ id, updates }) => {
-    const response = await fetch(`http://localhost:5000/products/${id}`, {
+    const response = await fetch(`http://localhost:5001/products/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updates),
@@ -57,7 +60,7 @@ export const updateProduct = createAsyncThunk(
 export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async (id) => {
-    await fetch(`http://localhost:5000/products/${id}`, {
+    await fetch(`http://localhost:5001/products/${id}`, {
       method: 'DELETE',
     });
     const products = loadProductsFromLocalStorage().filter(product => product.id !== id);
@@ -66,6 +69,7 @@ export const deleteProduct = createAsyncThunk(
   }
 );
 
+// Slice
 const productSlice = createSlice({
   name: "products",
   initialState: {
@@ -89,5 +93,6 @@ const productSlice = createSlice({
       });
   },
 });
+
 
 export default productSlice.reducer;

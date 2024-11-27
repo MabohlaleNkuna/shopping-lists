@@ -106,6 +106,35 @@
       "password": "zzzzzz",
       "name": "llw",
       "surname": "nlw"
+    },
+    {
+      "id": "c4bb",
+      "email": "w@gmail.com",
+      "password": "123456",
+      "name": "wise",
+      "surname": "nkuna"
+    },
+    {
+      "id": "2552",
+      "email": "a@gmail.com",
+      "password": "123456",
+      "name": "aaaa",
+      "surname": "aaaa"
+    },
+    {
+      "id": "11c8",
+      "email": "c@gmail.com",
+      "password": "123456",
+      "name": "wise",
+      "surname": "nkuna",
+      "phoneNumber": ""
+    },
+    {
+      "id": "ba22",
+      "email": "b@gmail.com",
+      "password": "123456",
+      "name": "bohlale",
+      "surname": "nkuna"
     }
   ],
   "products": [
@@ -163,6 +192,116 @@
         "ee"
       ],
       "userId": "a440"
+    },
+    {
+      "name": "Goldair Glass Kettle 1.8L",
+      "quantity": 2,
+      "notes": "jjj",
+      "category": "jjjj",
+      "images": [
+        "https://th.bing.com/th/id/OIP.QYuTK96h0rcmGu2dKdMpNwAAAA?rs=1&pid=ImgDetMain"
+      ],
+      "userId": "e826",
+      "id": "7165"
+    },
+    {
+      "id": "106c",
+      "name": "iron",
+      "quantity": 2,
+      "notes": "jjj",
+      "category": "hhh",
+      "images": [
+        "https://th.bing.com/th/id/OIP.VSLA6T36ptaDz8U0_e76sgHaGi?rs=1&pid=ImgDetMain"
+      ],
+      "userId": "2552"
+    },
+    {
+      "id": "bcb6",
+      "name": "dress",
+      "quantity": 1,
+      "notes": "llll",
+      "category": "clothing",
+      "images": [
+        "https://th.bing.com/th/id/OIP.CqnmXlI_NNWdsGLDdhHypgAAAA?rs=1&pid=ImgDetMain"
+      ],
+      "userId": "2552"
+    },
+    {
+      "id": "0beb",
+      "name": "kette",
+      "quantity": 1,
+      "notes": "gghjj",
+      "category": "electronics",
+      "images": [
+        "https://th.bing.com/th/id/OIP.QYuTK96h0rcmGu2dKdMpNwAAAA?rs=1&pid=ImgDetMain"
+      ],
+      "userId": "11c8"
+    },
+    {
+      "id": "64d2",
+      "name": "kette",
+      "quantity": 1,
+      "notes": "errtty",
+      "category": "electronics",
+      "images": [
+        "https://th.bing.com/th/id/OIP.QYuTK96h0rcmGu2dKdMpNwAAAA?rs=1&pid=ImgDetMain"
+      ],
+      "userId": "ba22"
+    },
+    {
+      "id": "4f85",
+      "name": "dress",
+      "quantity": 1,
+      "notes": "ygjhgj",
+      "category": "clothing",
+      "images": [
+        "https://th.bing.com/th/id/OIP.HMcTz3Yw49G42voWJPpGDwHaJg?w=203&h=261&c=7&r=0&o=5&pid=1.7"
+      ],
+      "userId": "ba22"
+    },
+    {
+      "id": "807f",
+      "name": "shirt",
+      "quantity": 1,
+      "notes": "ghfgfg",
+      "category": "clothing",
+      "images": [
+        "https://th.bing.com/th/id/R.b88c7a448665b82650396b854c53b4de?rik=r4PM7Fggez9zsQ&pid=ImgRaw&r=0"
+      ],
+      "userId": "ba22"
+    },
+    {
+      "id": "bc01",
+      "name": "dress2",
+      "quantity": 1,
+      "notes": "gggf",
+      "category": "clothing",
+      "images": [
+        "https://th.bing.com/th/id/OIP.HMcTz3Yw49G42voWJPpGDwHaJg?w=203&h=261&c=7&r=0&o=5&pid=1.7"
+      ],
+      "userId": "ba22"
+    },
+    {
+      "id": "d6a1",
+      "name": "car1",
+      "quantity": 1,
+      "notes": "ghghj",
+      "category": "cars",
+      "images": [
+        "https://th.bing.com/th/id/R.bdc53f193c4876a40019126cbe555bb9?rik=lgFR%2fnWZhwhchQ&pid=ImgRaw&r=0"
+      ],
+      "userId": "2552"
+    },
+    {
+      "id": "6bf8",
+      "name": "car2",
+      "quantity": 1,
+      "notes": "hggg",
+      "category": "cars",
+      "images": [
+        ""
+      ],
+      "userId": "2552"
     }
   ]
 }

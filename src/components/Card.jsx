@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteProduct } from '../store/slices/productSlice';
-import StyledImage from './StyledImage'; // Import the StyledImage component
+import StyledImage from './StyledImage'; 
 
 const Card = ({ id, name, price, imageUrl, onEdit }) => {
   const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../store/slices/userSlice'; // Direct import
+import { loginUser } from '../store/slices/userSlice'; 
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
@@ -11,7 +11,7 @@ const LoginPage = () => {
 
   const handleLogin = () => {
     const userData = { email, password };
-    dispatch(loginUser(userData)); // Use the correct action
+    dispatch(loginUser(userData)); 
     navigate('/profile');
   };
 

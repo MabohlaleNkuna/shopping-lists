@@ -10,7 +10,7 @@ const Home = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchAllProducts("http://localhost:5000/products"));
+    dispatch(fetchAllProducts("http://localhost:5001/products"));
   }, [dispatch]);
   return (
     <div className="container product-catalogue">
