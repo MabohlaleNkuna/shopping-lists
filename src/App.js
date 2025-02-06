@@ -1,12 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Navbar from './components/Navbar';
+import Navbar from './components/CustomNavbar';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
 import ProfilePage from './pages/ProfilePage';
 import ProductList from './components/ProductList';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import './App.css'
 

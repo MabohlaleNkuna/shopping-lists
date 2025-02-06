@@ -1,45 +1,19 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Global Styles */
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Navbar Styles */
+.navbar, .navbar a, .nav-link {
+  color: white !important;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
+/* Card Styles */
 .card {
   padding: 2em;
 }
 
-.read-the-docs {
-  color: #888;
-}
 .card-wrapper {
   margin-bottom: 20px;
 }
@@ -71,14 +45,19 @@
   color: #555;
 }
 
+/* Button Styles */
 .btn {
   margin: 5px;
   font-size: 1rem;
 }
 
 .btn-primary {
-  background-color: #007bff;
+  background-color: #4CAF50; /* Complementary green */
   border: none;
+}
+
+.btn-primary:hover {
+  background-color: #45a049;
 }
 
 .btn-secondary {
@@ -91,9 +70,12 @@
   border: none;
 }
 
+/* Margin Utility */
 .mt-2 {
   margin-top: 10px;
 }
+
+/* Search Container */
 .search-container {
   margin-bottom: 20px;
 }
@@ -104,6 +86,7 @@
   font-size: 16px;
 }
 
+/* Category Heading */
 .category-heading {
   margin-top: 20px;
   font-size: 1.5em;
@@ -111,6 +94,7 @@
   padding-bottom: 5px;
 }
 
+/* Product List */
 .product-list {
   list-style-type: none;
   padding: 0;
@@ -119,6 +103,8 @@
 .product-item {
   margin-bottom: 15px;
 }
+
+/* Registration Styles */
 .registration-container {
   display: flex;
   justify-content: center;
@@ -128,12 +114,12 @@
 }
 
 .registration-form {
-  background: rgba(255, 255, 255, 0.8); 
+  background: rgba(255, 255, 255, 0.8);
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   width: 100%;
-  max-width: 400px; 
+  max-width: 400px;
 }
 
 .registration-form h2 {
@@ -154,7 +140,7 @@
   display: block;
   width: 100%;
   padding: 10px;
-  background-color: #004aad; 
+  background-color: #004aad;
   color: #ffffff;
   border: none;
   border-radius: 4px;
@@ -163,8 +149,10 @@
 }
 
 .register-button:hover {
-  background-color: #003a8c; 
+  background-color: #003a8c;
 }
+
+/* Login Styles */
 .login-container {
   display: flex;
   justify-content: center;
@@ -211,6 +199,8 @@
 .login-button:hover {
   background-color: #003a8c;
 }
+
+/* Homepage Container */
 .homepage-container {
   display: flex;
   flex-direction: column;
@@ -219,14 +209,30 @@
   min-height: 100vh;
   background-color: #f4f4f4;
   padding: 20px;
+  background-image: url('../src/assets/bg1.jpg'); 
+  background-size: cover;
+  background-position: center;
 }
 
-.welcome-message {
-  font-size: 2rem;
+.homepage-container h1 {
+  font-size: 4rem;
   font-weight: bold;
-  color: #004aad;
+  color: #ff5733 important!; 
   text-align: center;
   margin-bottom: 20px;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2), 0px 0px 25px rgba(10, 19, 27, 0.6);
+  font-family: 'Arial', sans-serif;
+  animation: fadeIn 2s ease-out;
+}
+
+/* Animation for fading in elements */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .user-info {
@@ -251,4 +257,41 @@
 
 .link-text:hover {
   text-decoration: underline;
+}
+
+/* App.css */
+.homepage-container h1 {
+  animation: fadeIn 2s ease-out;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  animation: bounce 1s infinite;
+}
+
+.btn-primary:hover {
+  background-color: #004aad;
+  transition: background-color 0.3s ease;
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .homepage-container h1 {
+    font-size: 1.5rem;
+  }
+
+  .btn-primary {
+    font-size: 0.8rem;
+  }
 }

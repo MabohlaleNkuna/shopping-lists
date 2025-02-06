@@ -13,7 +13,6 @@ const ProductForm = ({ onClose, product }) => {
   });
   const dispatch = useDispatch();
 
-  // If a product is passed for editing, pre-fill the form
   useEffect(() => {
     if (product) {
       setFormProduct({
@@ -27,18 +26,12 @@ const ProductForm = ({ onClose, product }) => {
   }, [product]);
 
   const handleChange = (field, value) => {
-    setFormProduct({
-      ...formProduct,
-      [field]: value,
-    });
+    setFormProduct({ ...formProduct, [field]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!userData?.id) {
-      console.error('User data is not available.');
-      return;
-    }
+    if (!userData?.id) return;
 
     const updatedProduct = {
       ...formProduct,
@@ -47,76 +40,48 @@ const ProductForm = ({ onClose, product }) => {
       userId: userData.id,
     };
 
-    if (product) {
-      // If a product is being edited, dispatch the update action
-      dispatch(updateProduct({ id: product.id, updates: updatedProduct }));
-    } else {
-      // Otherwise, add a new product
-      dispatch(addProduct([updatedProduct]));
-    }
-
-    setFormProduct({
-      name: '',
-      quantity: '',
-      notes: '',
-      category: '',
-      images: '',
-    }); // Reset form
-    onClose(); // Close the form
+    product ? dispatch(updateProduct({ id: product.id, updates: updatedProduct })) : dispatch(addProduct([updatedProduct]));
+    setFormProduct({ name: '', quantity: '', notes: '', category: '', images: '' });
+    onClose();
   };
 
   return (
-    <div className="modal" style={{ display: 'block', zIndex: 1 }}>
-      <div className="modal-content" style={{ margin: '15% auto', padding: '20px', width: '80%' }}>
-        <span className="close" onClick={onClose} style={{ cursor: 'pointer' }}>
-          &times;
-        </span>
-        <h2>{product ? 'Update Product' : 'Add New Product'}</h2>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Name:
-            <input
-              type="text"
-              value={formProduct.name}
-              onChange={(e) => handleChange('name', e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Quantity:
-            <input
-              type="number"
-              value={formProduct.quantity}
-              onChange={(e) => handleChange('quantity', e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Notes:
-            <textarea
-              value={formProduct.notes}
-              onChange={(e) => handleChange('notes', e.target.value)}
-            />
-          </label>
-          <label>
-            Category:
-            <input
-              type="text"
-              value={formProduct.category}
-              onChange={(e) => handleChange('category', e.target.value)}
-              required
-            />
-          </label>
-          <label>
-            Images (comma-separated):
-            <input
-              type="text"
-              value={formProduct.images}
-              onChange={(e) => handleChange('images', e.target.value)}
-            />
-          </label>
-          <button type="submit">{product ? 'Update Product' : 'Save Product'}</button>
-        </form>
+    <div className="modal fade show d-block" style={{ zIndex: 1050 }}>
+      <div className="modal-dialog modal-dialog-centered">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title">{product ? 'Update Product' : 'Add New Product'}</h5>
+            <button type="button" className="btn-close" onClick={onClose}></button>
+          </div>
+          <div className="modal-body">
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <label className="form-label">Name</label>
+                <input type="text" className="form-control" value={formProduct.name} onChange={(e) => handleChange('name', e.target.value)} required />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Quantity</label>
+                <input type="number" className="form-control" value={formProduct.quantity} onChange={(e) => handleChange('quantity', e.target.value)} required />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Notes</label>
+                <textarea className="form-control" value={formProduct.notes} onChange={(e) => handleChange('notes', e.target.value)}></textarea>
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Category</label>
+                <input type="text" className="form-control" value={formProduct.category} onChange={(e) => handleChange('category', e.target.value)} required />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Images (comma-separated)</label>
+                <input type="text" className="form-control" value={formProduct.images} onChange={(e) => handleChange('images', e.target.value)} />
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={onClose}>Close</button>
+                <button type="submit" className="btn btn-primary">{product ? 'Update' : 'Save'}</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );

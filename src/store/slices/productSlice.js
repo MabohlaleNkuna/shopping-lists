@@ -11,7 +11,6 @@ const saveProductsToLocalStorage = (products) => {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(products));
 };
 
-// Thunks
 export const fetchAllProducts = createAsyncThunk(
   "products/fetchAllProducts",
   async (apiUrl) => {
@@ -69,7 +68,6 @@ export const deleteProduct = createAsyncThunk(
   }
 );
 
-// Slice
 const productSlice = createSlice({
   name: "products",
   initialState: {
@@ -93,6 +91,5 @@ const productSlice = createSlice({
       });
   },
 });
-
 
 export default productSlice.reducer;

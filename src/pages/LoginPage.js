@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../store/slices/userSlice'; 
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // Import Link
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -34,6 +35,7 @@ const LoginPage = () => {
           className="form-input"
         />
         <button onClick={handleLogin} className="login-button">Login</button>
+        <p>Don't have an account? <Link to="/register">Register here</Link></p> {/* Link to Register page */}
       </div>
     </div>
   );

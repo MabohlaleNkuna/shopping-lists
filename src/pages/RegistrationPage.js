@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../store/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // Import Link
 
 const RegistrationPage = () => {
   const [email, setEmail] = useState('');
@@ -74,6 +75,7 @@ const RegistrationPage = () => {
         {errors.password && <p className="error-message">{errors.password}</p>}
         
         <button onClick={handleRegister} className="register-button">Register</button>
+        <p>Already have an account? <Link to="/login">Login here</Link></p> {/* Link to Login page */}
       </div>
     </div>
   );
